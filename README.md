@@ -140,7 +140,7 @@ After hyperparameter tuning, the **Decision Tree classifier achieved the highest
 
 ### Model Evaluation
 
-![Classification Confusion Matrix](images/confusion-matrix.png)
+![Classification Confusion Matrix](images/machinelearning/19-tree-confusionmatrix.png)
 
 Confusion matrices were used alongside accuracy scores to examine classification performance and identify incorrect landing predictions.
 
