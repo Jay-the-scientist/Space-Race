@@ -53,7 +53,7 @@ The analysis examined:
 
 ### Landing Success Over Time
 
-![Falcon 9 Landing Success Over Time](images/landing-success-over-time.png)
+![Falcon 9 Landing Success Over Time](images/pandasvisualization/6-yearlylaunchsuccessrate.png)
 
 Landing success generally increased over the analyzed period, indicating substantial improvement in Falcon 9 first-stage recovery performance over time.
 
@@ -67,7 +67,9 @@ SQL analysis was also used to query launch records and calculate statistics such
 
 **Folium** was used to examine the geographic characteristics of SpaceX launch facilities and landing outcomes.
 
-![SpaceX Launch Site Map](images/launch-site-map.png)
+![SpaceX Launch Site Map](images/interactivemaps/12-launchlocationsclusteredmarkers-zoom.png)
+
+![SpaceX Launch Site Map](images/interactivemaps/13-polyline-from2coordinates-tocoast.png)
 
 The interactive mapping analysis included:
 
@@ -84,7 +86,9 @@ This provided a geographic perspective on launch infrastructure and site placeme
 
 A **Plotly Dash** application was developed to provide interactive exploration of the launch data.
 
-![SpaceX Interactive Dashboard](images/launch-dashboard.png)
+![SpaceX Interactive Dashboard](images/interactivemaps/dashboard1-1.png)
+
+![SpaceX Interactive Dashboard](images/interactivemaps/dashboard1-2.png)
 
 The dashboard enables analysis of:
 
