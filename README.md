@@ -1,79 +1,196 @@
-# Space-Race
+# SpaceX Falcon 9 Landing Prediction
 
-## SpaceX Falcon 9 Landing Prediction
-This project applies machine learning and data science techniques to build predictive models for SpaceX first stage booster landing outcomes using their launch data. The goal is to help SpaceX and other launch providers optimize their reusability programs.
+End-to-end data science analysis of SpaceX Falcon 9 launches using API data collection, web scraping, SQL, exploratory analysis, geospatial visualization, interactive dashboards, and machine learning to predict first-stage landing success.
 
-## Project Description
-SpaceX aims to reduce costs through reuse of Falcon 9 first stages. However, landings pose significant challenges and are not always successful. This work develops classification models to predict landing result based on mission parameters. Insights can guide engineering and pricing decisions.
+**Best Model:** Decision Tree — 87.5% accuracy  
+**Tech:** Python · SQL · Pandas · Beautiful Soup · Folium · Plotly Dash · Scikit-learn
 
-## Installation
+📊 **[View Project Presentation](SpaceX-Falcon9-Data-Science-Presentation.pdf)**
 
-Required packages can be  installed using:
-```bash
-pip install pandas numpy scipy sklearn matplotlib folium
-```
+---
 
-## Data
-Launch records were obtained from SpaceX API and Wikipedia pages. Over 100 entries contained attributes on payload, orbit, site, booster, outcome details.
+## Project Objective
 
-![Raw Data](images/dataprep/1-rawdata.png)
+SpaceX's ability to recover and reuse Falcon 9 first-stage boosters plays an important role in reducing launch costs.
 
-## Methodology
-Data wrangling cleaned and standardized values. EDA explored relationships. Models like Logistic Regression, Decision Trees and Random Forests were implemented in scikit-learn. Hyperparameter tuning optimized performance.
+This project analyzes historical Falcon 9 launch data to identify factors associated with successful first-stage landings and applies classification models to predict landing outcomes.
 
-![Structured Dataset](images/dataprep/5-structureddataset.png) 
+The analysis explores questions such as:
 
-## Results
-- The Random Forest classifier achieved 84% accuracy on the test set, outperforming other algorithms. 
+- How has landing success changed over time?
+- How do launch sites differ in their success rates?
+- What relationships exist between payload mass, orbit type, booster version, and landing outcome?
+- Can historical mission characteristics be used to classify whether a first stage will successfully land?
 
+---
 
-- Payload mass, booster version and launch site emerged as important predictors. These models provide a quantitative approach to support SpaceX operations.
+## Data Collection & Preparation
 
+Launch data was collected from multiple public sources:
 
-## Visualizations
+- **SpaceX API** for structured launch records
+- **Wikipedia** using Beautiful Soup for supplementary Falcon 9 launch information
 
-### I was able to visualize the trends in yearly launch success rate:
+The resulting dataset contained more than 100 flight records with information including payload mass, orbit, launch site, booster version, flight number, and landing outcome.
 
-![Yearly Launch Success Rate](images/pandasvisualization/6-yearlylaunchsuccessrate.png)
+The data was then cleaned and prepared for analysis by handling missing values, standardizing fields, transforming landing outcomes into classification labels, and preparing features for exploratory analysis and machine learning.
 
-### Then generated an interactive map that displayed the successful and failed launches per launch site
+---
 
-![Successful and Failed Launches Visualized](images/interactivemaps/12-launchlocationsclusteredmarkers-zoom.png)
+## Exploratory Data Analysis
 
-### And an interactive dashboard that displays the success ratings of each launch site
+Exploratory analysis was performed using both **Python and SQL** to investigate relationships among launch characteristics and landing success.
 
-![All Sites Success Ratings](images/interactivemaps/15-dashboard-all.png)
+The analysis examined:
 
-### And an interactive plot that shows the relation between mission type (success or fail) and payload mass among the different booster versions
+- Launch success by year
+- Payload mass and landing outcome
+- Launch-site performance
+- Orbit type and success rate
+- Booster version
+- Flight number
+- Payload statistics and launch records using SQL queries
 
-![Payload Mass v Mission Type by Booster Version](images/interactivemaps/17-dashboard-payloadmass-vs-boosterversion.png)
+### Landing Success Over Time
 
-### Examining the confusion matrix, we see that logistic regression can distinguish between the different classes.  We see that the problem is false positives.
+![Falcon 9 Landing Success Over Time](images/landing-success-over-time.png)
 
-Overview:
+Landing success generally increased over the analyzed period, indicating substantial improvement in Falcon 9 first-stage recovery performance over time.
 
-True Postive - 12 (True label is landed, Predicted label is also landed)
+SQL analysis was also used to query launch records and calculate statistics such as payload averages, launch-site activity, booster performance, and landing outcomes.
 
-False Postive - 3 (True label is not landed, Predicted label is landed)
+---
 
-![Confusion Matrix](images/machinelearning/19-logreg-confusionmatrix.png)
+## Interactive & Geospatial Analysis
 
+### Geospatial Launch Analysis
 
+**Folium** was used to examine the geographic characteristics of SpaceX launch facilities and landing outcomes.
 
-### The accuracy of the different models is basically the same. This could be because the dataset is relatively small
+![SpaceX Launch Site Map](images/launch-site-map.png)
 
-![Machine Learning Outcome](images/machinelearning/20-bestclassificationscore.png)
+The interactive mapping analysis included:
 
-But the highest accuracy was the tree model with the foltuned hpyerparameters :(best parameters)  {'criterion': 'gini', 'max_depth': 2, 'max_features': 'sqrt', 'min_samples_leaf': 2, 'min_samples_split': 5, 'splitter': 'best'}
-accuracy : 0.875
+- SpaceX launch-site locations
+- Successful and unsuccessful landing outcomes
+- Marker clustering
+- Proximity to coastlines
+- Nearby highways and railways
+- Distance to populated areas
 
-## Conclusions
+This provided a geographic perspective on launch infrastructure and site placement beyond the statistical analysis.
 
-This project demonstrated the value of applying machine learning and data science methods to solve challenges in the aerospace industry. Models were developed to accurately predict SpaceX Falcon 9 first stage booster landing outcomes based on mission parameters with an optimized Random Forest classifier achieving 84% accuracy.
+### Interactive Launch Dashboard
 
-Insights into important predictive factors like payload mass and booster version generation provide objective, data-backed guidance to support SpaceX's engineering and operational decision making for improving reusability.
+A **Plotly Dash** application was developed to provide interactive exploration of the launch data.
 
-The results validate the potential of leveraging publicly available space sector data in combination with open source tools and techniques. This establishes a foundation for ongoing work aimed at directly integrating analytical models and recommendations into SpaceX systems.
+![SpaceX Interactive Dashboard](images/launch-dashboard.png)
 
-In summary, data analytics represents an effective approach for gaining new knowledge from existing information resources and building predictive applications with real utility for space exploration goals. This project reinforces data science as a promising domain with many opportunities for continued practical impact.
+The dashboard enables analysis of:
+
+- Overall launch-site success
+- Individual launch-site performance
+- Payload ranges
+- Successful vs. unsuccessful launches
+- Relationships between payload mass and booster version
+
+Interactive filtering allows the launch data to be explored from multiple perspectives rather than relying only on static visualizations.
+
+---
+
+## Machine Learning
+
+The final stage of the project applied classification algorithms to predict whether a Falcon 9 first stage would successfully land.
+
+The modeling workflow included:
+
+- Feature preparation
+- Train/test splitting
+- Feature standardization
+- Model training
+- Hyperparameter tuning with `GridSearchCV`
+- Accuracy comparison
+- Confusion-matrix evaluation
+
+Classification approaches evaluated included:
+
+- Logistic Regression
+- Decision Tree
+- Support Vector Machine (SVM)
+- K-Nearest Neighbors (KNN)
+
+### Best Model
+
+After hyperparameter tuning, the **Decision Tree classifier achieved the highest observed accuracy of 87.5%**.
+
+**Best Decision Tree Parameters:**
+
+| Parameter | Value |
+|---|---|
+| Criterion | `gini` |
+| Max depth | `2` |
+| Max features | `sqrt` |
+| Min samples leaf | `2` |
+| Min samples split | `5` |
+| Splitter | `best` |
+
+### Model Evaluation
+
+![Classification Confusion Matrix](images/confusion-matrix.png)
+
+Confusion matrices were used alongside accuracy scores to examine classification performance and identify incorrect landing predictions.
+
+---
+
+## Key Insights
+
+- Falcon 9 first-stage landing success generally improved over the analyzed period.
+- Landing success varied across launch sites, orbit types, payload ranges, and booster configurations.
+- KSC LC-39A demonstrated a high landing success rate within the analyzed data.
+- Payload mass showed different relationships with landing outcomes depending on launch site and booster configuration.
+- Geospatial analysis showed launch facilities positioned near coastlines and transportation infrastructure while maintaining distance from densely populated areas.
+- Classification models demonstrated that historical mission characteristics can be used to distinguish between successful and unsuccessful first-stage landing outcomes.
+- The tuned Decision Tree produced the highest observed model accuracy at **87.5%**.
+
+---
+
+## Tools & Technologies
+
+### Data Collection & Processing
+- Python
+- Pandas
+- NumPy
+- Requests
+- Beautiful Soup
+- SpaceX REST API
+
+### Data Analysis & Visualization
+- SQL
+- SQLite
+- Matplotlib
+- Seaborn
+- Plotly
+- Folium
+
+### Machine Learning
+- Scikit-learn
+- Logistic Regression
+- Decision Tree
+- Support Vector Machine
+- K-Nearest Neighbors
+- GridSearchCV
+
+### Application Development
+- Plotly Dash
+
+### Development Environment
+- Jupyter Notebook
+
+---
+
+## Project Background
+
+This project was completed as part of the **IBM Data Science Professional Certificate capstone**.
+
+The project provided hands-on experience applying an end-to-end data science workflow, including acquiring data from APIs and web sources, cleaning and transforming data, querying data with SQL, performing exploratory and geospatial analysis, developing interactive dashboards, and training and evaluating machine learning models.
 
